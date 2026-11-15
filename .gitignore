@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.jsonl
+.env
+.env.*
+!.env.example
+cad-knowledge/
+*.step
+*.stp
+*.3mf
+*.stl
