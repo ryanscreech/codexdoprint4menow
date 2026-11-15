@@ -1,0 +1,32 @@
+name: Package and behaviour tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            powershell: pwsh
+            python: '3.9'
+          - os: macos-latest
+            powershell: pwsh
+            python: '3.11'
+          - os: windows-latest
+            powershell: pwsh
+            python: '3.11'
+          - os: windows-latest
+            powershell: powershell
+            python: '3.11'
+    runs-on: ${{ matrix.os }}
+    env:
+      CAD_TEST_POWERSHELL: ${{ matrix.powershell }}
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests -v

@@ -9,3 +9,4 @@ cad-knowledge/
 *.stp
 *.3mf
 *.stl
+.cad-continuity-backups/
