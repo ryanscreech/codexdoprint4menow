@@ -1,5 +1,7 @@
 # Install and update
 
+This page describes the Codex integration. For another host, read [Using this toolkit with other agents](OTHER-AGENTS.md) first; the PowerShell installer uses the Codex paths and does not configure other clients.
+
 ## Windows (PowerShell)
 
 Requirements: Git and a Codex client with local skill support, installed separately; PowerShell 5.1+. Python 3.9+ is optional for the session indexer and required for the test suite.
