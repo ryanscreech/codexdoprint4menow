@@ -8,7 +8,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
+          # Python 3.9 has builds for Ubuntu 24.04, but not newer runners.
+          - os: ubuntu-24.04
             powershell: pwsh
             python: '3.9'
           - os: macos-latest
@@ -30,3 +31,6 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python -m unittest discover -s tests -v
+        # Keep Windows PowerShell from inheriting PowerShell 7 module paths
+        # through the Python test process.
+        shell: ${{ matrix.powershell }}
