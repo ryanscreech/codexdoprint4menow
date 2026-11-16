@@ -30,7 +30,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: python -m unittest discover -s tests -v
-        # Keep Windows PowerShell from inheriting PowerShell 7 module paths
-        # through the Python test process.
-        shell: ${{ matrix.powershell }}
+      - name: Test with PowerShell 7
+        if: matrix.powershell == 'pwsh'
+        shell: pwsh
+        run: python -m unittest discover -s tests -v
+      # Use a native Windows PowerShell parent so Python does not pass
+      # incompatible PowerShell 7 module paths to the installer subprocess.
+      - name: Test with Windows PowerShell
+        if: matrix.powershell == 'powershell'
+        shell: powershell
+        run: python -m unittest discover -s tests -v
